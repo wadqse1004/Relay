@@ -12,3 +12,15 @@ def find_all(db: Session) -> list[User]:
 
 def find_by_id(db: Session, user_id: int) -> User | None:
     return db.get(User, user_id)
+
+
+def find_by_email(
+    db: Session,
+    email: str,
+) -> User | None:
+    statement = (
+        select(User)
+        .where(User.email == email)
+    )
+
+    return db.scalar(statement)
