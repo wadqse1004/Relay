@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../hooks/useTheme";
 
 import { apiClient } from "../api/client";
 
@@ -10,40 +11,71 @@ type LoginResponse = {
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
 
-  const [email, setEmail] = useState("developer@relay.local");
-  const [password, setPassword] = useState("password123");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [email, setEmail] = useState(() => {
+    return localStorage.getItem("saved_email") ?? "";
+  });
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const [password, setPassword] = useState("");
+
+  const [rememberEmail, setRememberEmail] = useState(() => {
+    return localStorage.getItem("saved_email") !== null;
+  });
+
+const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async ( event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setErrorMessage("");
 
-    try {
-      const response = await apiClient.post<LoginResponse>(
-        "/api/auth/login",
-        {
-          email,
-          password,
-        }
-      );
+  try {
+    const response = await apiClient.post<LoginResponse>(
+      "/api/auth/login",
+      {
+        email,
+        password,
+      }
+    );
 
-      localStorage.setItem(
-        "access_token",
-        response.data.access_token
-      );
+    // JWT 저장
+    localStorage.setItem(
+      "access_token",
+      response.data.access_token
+    );
 
-      navigate("/");
-    } catch {
-      setErrorMessage("로그인에 실패했습니다.");
+    // 아이디 저장 처리
+    if (rememberEmail) {
+      localStorage.setItem("saved_email", email);
+    } else {
+      localStorage.removeItem("saved_email");
     }
-  };
+
+    // 로그인 성공 후 이동
+    navigate("/");
+  } catch {
+    setErrorMessage("로그인에 실패했습니다.");
+  }
+};
 
   return (
-    <div>
-      <h1>Relay Login</h1>
+    <div className="login-container">
+      <div className="login-brand">
 
-      <form onSubmit={handleSubmit}>
+        <img
+          src={
+            theme === "dark"
+              ? "/branding/relay-logo-light.png"
+              : "/branding/relay-logo-dark.png"
+          }
+          alt="Relay"
+          width={160}
+        />
+
+        <p>사람을 잇고, 업무를 흐르게</p>
+    </div>
+
+      <form className="login-form" onSubmit={handleSubmit}>
         <div>
           <label>이메일</label>
           <input
@@ -61,10 +93,32 @@ export default function LoginPage() {
           />
         </div>
 
+        <div>
+          <label>
+          <input
+            type="checkbox"
+            checked={rememberEmail}
+            onChange={(event) =>
+            setRememberEmail(event.target.checked)
+            }
+          />
+            아이디 저장
+          </label>
+        </div>
+
         <button type="submit">로그인</button>
 
         {errorMessage && <p>{errorMessage}</p>}
       </form>
+
+      <button
+        type="button"
+        className="theme-button"
+        onClick={toggleTheme}
+        style={{ marginTop: "20px" }}
+      >
+        {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+      </button>
     </div>
   );
 }

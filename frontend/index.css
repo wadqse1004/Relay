@@ -1,0 +1,178 @@
+
+/* Light Theme */
+
+:root {
+  font-family: Inter, Pretendard, sans-serif;
+
+  --bg-primary: #f5f7fb;
+  --bg-secondary: #ffffff;
+  --bg-hover: #edf2f9;
+
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+
+  --border-color: #e2e8f0;
+  --accent-color: #0a7cff;
+}
+
+/* Dark Theme */
+
+[data-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-hover: #29374b;
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+
+  --border-color: #334155;
+  --accent-color: #2997ff;
+}
+
+/* Global */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: var(--accent-color);
+}
+
+/* Main Layout */
+
+.main-layout {
+  min-height: 100vh;
+}
+
+.main-header {
+  height: 64px;
+  padding: 0 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.main-body {
+  display: flex;
+  min-height: calc(100vh - 64px);
+}
+
+.sidebar {
+  width: 230px;
+  padding: 24px 16px;
+
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar nav li {
+  margin: 14px 0;
+}
+
+.main-content {
+  flex: 1;
+  padding: 32px;
+}
+
+/* Theme Button */
+
+.theme-button {
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.theme-button:hover {
+  background: var(--bg-hover);
+}
+
+/* Login */
+
+.login-container {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+}
+
+.login-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.login-brand p {
+  color: var(--text-secondary);
+}
+
+.login-form {
+  width: 100%;
+  max-width: 380px;
+
+  padding: 32px;
+
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.login-form input:not([type="checkbox"]) {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 16px;
+
+  background: var(--bg-primary);
+  color: var(--text-primary);
+
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.login-form button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+
+  background: var(--accent-color);
+  color: #ffffff;
+
+  border: none;
+  border-radius: 8px;
+  margin-top: 16px;
+}
