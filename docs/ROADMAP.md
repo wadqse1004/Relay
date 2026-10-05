@@ -110,3 +110,24 @@
 - [x] LoginPage 테마 적용
 - [x] Dashboard / Layout 테마 적용
 - [x] 새로고침 후 테마 유지 확인
+
+## Day 8 — Approval Database & Basic API
+
+- [x] 전자결재 공통코드 Seed 추가
+- [x] `approval_documents` 테이블 생성
+- [x] `approval_lines` 테이블 생성
+- [x] `approval_histories` 테이블 생성
+- [x] 결재 관련 FK / INDEX 구성
+- [x] ApprovalDocument SQLAlchemy Model 생성
+- [x] ApprovalLine SQLAlchemy Model 생성
+- [x] ApprovalHistory SQLAlchemy Model 생성
+- [x] Approval Request / Response Schema 생성
+- [x] Approval Repository 구현
+- [x] 공통코드 ID 조회 기능 구현
+- [x] Repository `flush()` 기반 저장 구조 적용
+- [x] Approval Service 구현
+- [x] 결재문서 / 결재선 / 이력 단일 Transaction 처리
+- [x] 실패 시 Rollback 처리
+- [x] POST `/api/approvals` 구현
+- [x] Swagger 결재문서 생성 테스트
+- [x] DBeaver에서 결재문서 1건 / 결재선 2건 / 이력 1건 저장 확인

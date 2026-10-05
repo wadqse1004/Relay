@@ -5,7 +5,8 @@ from app.routers.department_router import router as department_router
 from app.routers.user_router import router as user_router
 from app.routers.auth_router import router as auth_router
 from fastapi.middleware.cors import CORSMiddleware
-
+from app.routers.approval_router import router as approval_router
+import app.models
 
 app = FastAPI(
     title="Relay API",
@@ -26,6 +27,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.include_router(approval_router)
 
 
 @app.get("/")
