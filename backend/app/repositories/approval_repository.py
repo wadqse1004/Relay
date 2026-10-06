@@ -1,5 +1,6 @@
 from sqlalchemy import text
 from sqlalchemy.orm import Session
+from sqlalchemy import select
 
 from app.models.approval_document import ApprovalDocument
 from app.models.approval_history import ApprovalHistory
@@ -62,3 +63,63 @@ def add_history(
     db.flush()
 
     return history
+
+def find_document(
+    db: Session,
+    document_id: int,
+) -> ApprovalDocument | None:
+    return db.get(ApprovalDocument, document_id)
+
+
+def find_approval_line(
+    db: Session,
+    document_id: int,
+    approver_id: int,
+) -> ApprovalLine | None:
+    stmt = (
+        select(ApprovalLine)
+        .where(
+            ApprovalLine.approval_document_id == document_id,
+            ApprovalLine.approver_id == approver_id,
+            ApprovalLine.is_active.is_(True),
+        )
+    )
+
+    return db.scalar(stmt)
+
+
+def find_remaining_waiting_lines(
+    db: Session,
+    document_id: int,
+    waiting_status_id: int,
+) -> list[ApprovalLine]:
+    stmt = (
+        select(ApprovalLine)
+        .where(
+            ApprovalLine.approval_document_id == document_id,
+            ApprovalLine.status_id == waiting_status_id,
+            ApprovalLine.is_active.is_(True),
+        )
+        .order_by(ApprovalLine.sequence)
+    )
+
+    return list(db.scalars(stmt))
+
+def find_previous_waiting_line(
+    db: Session,
+    document_id: int,
+    current_sequence: int,
+    waiting_status_id: int,
+) -> ApprovalLine | None:
+    stmt = (
+        select(ApprovalLine)
+        .where(
+            ApprovalLine.approval_document_id == document_id,
+            ApprovalLine.sequence < current_sequence,
+            ApprovalLine.status_id == waiting_status_id,
+            ApprovalLine.is_active.is_(True),
+        )
+        .order_by(ApprovalLine.sequence)
+    )
+
+    return db.scalar(stmt)

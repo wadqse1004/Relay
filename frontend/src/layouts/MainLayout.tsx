@@ -5,11 +5,11 @@ import Sidebar from "../components/Sidebar";
 
 export default function MainLayout() {
   return (
-    <div className="main-layout">
-      <Header />
+    <div className="app-layout">
+      <Sidebar />
 
-      <div className="main-body">
-        <Sidebar />
+      <div className="app-content">
+        <Header />
 
         <main className="main-content">
           <Outlet />

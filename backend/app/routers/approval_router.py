@@ -7,6 +7,14 @@ from app.schemas.approval import (
     ApprovalDocumentResponse,
 )
 from app.services import approval_service
+from app.services.approval_service import (
+    approve_document,
+    reject_document,
+)
+from app.schemas.approval import (
+    ApprovalActionRequest,
+    ApprovalDocumentResponse,
+)
 
 
 router = APIRouter(
@@ -27,4 +35,35 @@ def create_approval(
     return approval_service.create_approval_document(
         db,
         request,
+    )
+
+@router.post(
+    "/{document_id}/approve",
+    response_model=ApprovalDocumentResponse,
+)
+def approve(
+    document_id: int,
+    request: ApprovalActionRequest,
+    db: Session = Depends(get_db),
+):
+    return approve_document(
+        db=db,
+        document_id=document_id,
+        request=request,
+    )
+
+
+@router.post(
+    "/{document_id}/reject",
+    response_model=ApprovalDocumentResponse,
+)
+def reject(
+    document_id: int,
+    request: ApprovalActionRequest,
+    db: Session = Depends(get_db),
+):
+    return reject_document(
+        db=db,
+        document_id=document_id,
+        request=request,
     )

@@ -5,3 +5,6 @@ from app.models.user import User
 from app.models.approval_document import ApprovalDocument
 from app.models.approval_line import ApprovalLine
 from app.models.approval_history import ApprovalHistory
+from app.models.leave_request import LeaveRequest
+from app.models.leave_balance import LeaveBalance
+from app.models.leave_adjustment import LeaveAdjustment

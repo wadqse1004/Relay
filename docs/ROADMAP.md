@@ -131,3 +131,33 @@
 - [x] POST `/api/approvals` 구현
 - [x] Swagger 결재문서 생성 테스트
 - [x] DBeaver에서 결재문서 1건 / 결재선 2건 / 이력 1건 저장 확인
+
+## Day 9 — Leave Request & Approval API
+
+- [x] `leave_requests` 테이블 생성
+- [x] `leave_balances` 테이블 생성
+- [x] `leave_adjustments` 테이블 생성
+- [x] 휴가 유형 공통코드 `LEAVE_TYPE` 추가
+- [x] 연차 / 오전반차 / 오후반차 / 병가 / 기타 Seed 추가
+- [x] LeaveRequest SQLAlchemy Model 생성
+- [x] LeaveBalance SQLAlchemy Model 생성
+- [x] LeaveAdjustment SQLAlchemy Model 생성
+- [x] ORM Metadata 등록
+- [x] Leave Request / Response Schema 생성
+- [x] Leave Repository 구현
+- [x] 연차 잔액 조회 기능 구현
+- [x] 연차 신청 생성 API 구현
+- [x] 연차 신청 시 전자결재 문서 자동 생성
+- [x] 결재선 자동 생성
+- [x] 상신 이력 자동 생성
+- [x] 연차 신청 / 결재문서 / 결재선 / 이력 단일 Transaction 처리
+- [x] 승인 API 구현
+- [x] 반려 API 구현
+- [x] 결재선 순서(sequence) 검증
+- [x] 1차 승인 후 문서 PENDING 유지 확인
+- [x] 최종 승인 후 문서 APPROVED 변경 확인
+- [x] 승인 이력 누적 확인
+- [x] 최종 승인 시 연차 사용일수 / 잔여일수 갱신
+- [x] DBeaver를 통한 데이터 검증
+- [x] MainLayout 구조 개선
+- [x] Sidebar가 Header 영역까지 이어지도록 레이아웃 수정

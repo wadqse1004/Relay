@@ -1,13 +1,8 @@
 import { Link } from "react-router-dom";
-import { useTheme } from "../hooks/useTheme";
 
 export default function Sidebar() {
-  const { theme } = useTheme();
 
-  const logoSrc =
-    theme === "dark"
-      ? "/branding/relay-logo-light.png"
-      : "/branding/relay-logo-dark.png";
+  const logoSrc = "/branding/relay-logo-light.png";
 
   return (
     <aside className="sidebar">

@@ -38,3 +38,7 @@ class ApprovalDocumentResponse(BaseModel):
     is_active: bool
 
     model_config = ConfigDict(from_attributes=True)
+
+class ApprovalActionRequest(BaseModel):
+    approver_id: int
+    comment: str | None = None
