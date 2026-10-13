@@ -3,7 +3,8 @@ from sqlalchemy.orm import Session
 
 from app.models.leave_balance import LeaveBalance
 from app.models.leave_request import LeaveRequest
-
+from app.models.approval_document import ApprovalDocument
+from app.models.common_code import CommonCode
 
 def find_leave_balance(
     db: Session,
@@ -37,3 +38,34 @@ def find_leave_request_by_document_id(
     )
 
     return db.scalar(stmt)
+
+def find_leave_requests_by_user(
+    db: Session,
+    user_id: int,
+):
+    stmt = (
+        select(
+            LeaveRequest,
+            CommonCode.code.label("status_code"),
+            CommonCode.name.label("status_name"),
+        )
+        .join(
+            ApprovalDocument,
+            ApprovalDocument.id
+            == LeaveRequest.approval_document_id,
+        )
+        .join(
+            CommonCode,
+            CommonCode.id
+            == ApprovalDocument.status_id,
+        )
+        .where(
+            LeaveRequest.user_id == user_id,
+            LeaveRequest.is_active.is_(True),
+        )
+        .order_by(
+            LeaveRequest.created_at.desc()
+        )
+    )
+
+    return db.execute(stmt).all()

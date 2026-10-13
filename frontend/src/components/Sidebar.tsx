@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Sidebar() {
 
@@ -28,6 +28,11 @@ export default function Sidebar() {
 
           <li>
             <Link to="/departments">Departments</Link>
+          </li>
+          <li>
+            <NavLink to="/leave">
+              전자결재 · 연차
+            </NavLink>
           </li>
         </ul>
       </nav>

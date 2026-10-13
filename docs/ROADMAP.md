@@ -161,3 +161,30 @@
 - [x] DBeaver를 통한 데이터 검증
 - [x] MainLayout 구조 개선
 - [x] Sidebar가 Header 영역까지 이어지도록 레이아웃 수정
+
+## Day 10 — Leave UI
+
+- [x] 연차 잔액 조회 API 추가
+- [x] LeaveBalance Response Schema 생성
+- [x] 프론트 Leave 타입 정의
+- [x] 프론트 Leave API 모듈 생성
+- [x] LeavePage 생성
+- [x] 총 연차 / 사용 연차 / 잔여 연차 카드 구현
+- [x] 연차 신청 폼 구현
+- [x] 휴가 유형 선택 UI 구현
+- [x] 시작일 / 종료일 입력 구현
+- [x] 사용 일수 입력 구현
+- [x] 사유 입력 구현
+- [x] 1차 / 2차 결재자 선택 구현
+- [x] 중복 결재자 선택 방지
+- [x] POST `/api/leaves` 연동
+- [x] 연차 신청 성공 메시지 처리
+- [x] 연차 신청 후 잔액 재조회
+- [x] 내 연차 신청 목록 조회 API 구현
+- [x] 결재 상태 포함 신청 목록 조회
+- [x] 신청 목록 프론트 연동
+- [x] PENDING / APPROVED / REJECTED 상태 표시
+- [x] 신청 후 연차 목록 자동 갱신
+- [x] React Effect 경고 정리
+- [x] Sidebar 연차 메뉴 연결
+- [x] Light / Dark 테마에서 LeavePage 동작 확인

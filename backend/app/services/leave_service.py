@@ -16,9 +16,9 @@ from app.repositories.approval_repository import (
 from app.repositories.leave_repository import (
     add_leave_request,
     find_leave_balance,
+    find_leave_requests_by_user,
 )
 from app.schemas.leave import LeaveRequestCreate
-
 
 def create_leave_request(
     db: Session,
@@ -159,3 +159,56 @@ def create_leave_request(
             status_code=500,
             detail="휴가 신청 처리 중 오류가 발생했습니다.",
         )
+
+def get_leave_balance(
+       db: Session,
+       user_id: int,
+       year: int,
+):
+    balance = find_leave_balance(
+        db=db,
+        user_id=user_id,
+        year=year,
+    )
+
+    if balance is None:
+        raise HTTPException(
+            status_code=404,
+            detail="연차 잔액 정보를 찾을 수 없습니다.",
+        )
+
+    return balance
+
+def get_leave_requests(
+    db: Session,
+    user_id: int,
+):
+    rows = find_leave_requests_by_user(
+        db=db,
+        user_id=user_id,
+    )
+
+    return [
+        {
+            "id": leave.id,
+            "approval_document_id":
+                leave.approval_document_id,
+            "leave_type_id":
+                leave.leave_type_id,
+            "start_date":
+                leave.start_date,
+            "end_date":
+                leave.end_date,
+            "days":
+                leave.days,
+            "reason":
+                leave.reason,
+            "status_code":
+                status_code,
+            "status_name":
+                status_name,
+            "created_at":
+                leave.created_at,
+        }
+        for leave, status_code, status_name in rows
+    ]

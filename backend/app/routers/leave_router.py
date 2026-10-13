@@ -5,9 +5,16 @@ from app.core.database import get_db
 from app.schemas.leave import (
     LeaveRequestCreate,
     LeaveRequestResponse,
+    LeaveBalanceResponse,
 )
-from app.services.leave_service import create_leave_request
-
+from app.services.leave_service import (
+    create_leave_request,
+    get_leave_balance,
+    get_leave_requests,
+)
+from app.schemas.leave import (
+    LeaveRequestListResponse,
+)
 
 router = APIRouter(
     prefix="/api/leaves",
@@ -27,4 +34,32 @@ def create_leave(
     return create_leave_request(
         db=db,
         request=request,
+    )
+
+@router.get(
+    "/balance",
+    response_model=LeaveBalanceResponse,
+)
+def get_balance(
+    user_id: int,
+    year: int,
+    db: Session = Depends(get_db),
+):
+    return get_leave_balance(
+        db=db,
+        user_id=user_id,
+        year=year,
+    )
+
+@router.get(
+    "",
+    response_model=list[LeaveRequestListResponse],
+)
+def get_leaves(
+    user_id: int,
+    db: Session = Depends(get_db),
+):
+    return get_leave_requests(
+        db=db,
+        user_id=user_id,
     )

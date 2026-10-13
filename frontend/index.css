@@ -247,3 +247,263 @@ a {
 .relay-login-theme svg {
   display: block;
 }
+
+.leave-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.leave-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.leave-page-header h1 {
+  margin: 0;
+  font-size: 24px;
+  color: var(--text-primary);
+}
+
+.leave-page-header p {
+  margin: 6px 0 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.leave-request-button {
+  height: 40px;
+  padding: 0 16px;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: var(--accent-color);
+  color: white;
+
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.leave-balance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.leave-balance-card {
+  padding: 22px;
+
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+
+  background: var(--bg-secondary);
+}
+
+.leave-balance-card span {
+  display: block;
+
+  margin-bottom: 14px;
+
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.leave-balance-card strong {
+  color: var(--text-primary);
+
+  font-size: 30px;
+}
+
+.leave-balance-card small {
+  margin-left: 5px;
+
+  color: var(--text-secondary);
+}
+
+.leave-message,
+.leave-error {
+  padding: 16px;
+
+  border-radius: 8px;
+
+  background: var(--bg-secondary);
+}
+
+.leave-error {
+  color: #dc2626;
+}
+
+@media (max-width: 800px) {
+  .leave-balance-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.leave-request-card {
+  padding: 24px;
+
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+
+  background: var(--bg-secondary);
+}
+
+.leave-request-card h2 {
+  margin: 0 0 20px;
+
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+.leave-request-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.leave-request-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.leave-request-form label > span {
+  font-size: 13px;
+  font-weight: 600;
+
+  color: var(--text-primary);
+}
+
+.leave-request-form input,
+.leave-request-form select,
+.leave-request-form textarea {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+
+  padding: 10px 12px;
+}
+
+.leave-request-form input,
+.leave-request-form select {
+  height: 42px;
+}
+
+.leave-request-form textarea {
+  resize: vertical;
+}
+
+.leave-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.leave-submit-button {
+  height: 44px;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: var(--accent-color);
+  color: white;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.leave-success {
+  padding: 12px;
+
+  border-radius: 8px;
+
+  background: rgba(22, 163, 74, 0.1);
+  color: #16a34a;
+}
+
+@media (max-width: 700px) {
+  .leave-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.leave-history-card {
+  padding: 24px;
+
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+
+  background: var(--bg-secondary);
+}
+
+.leave-history-card h2 {
+  margin: 0 0 18px;
+
+  color: var(--text-primary);
+  font-size: 18px;
+}
+
+.leave-history-head,
+.leave-history-row {
+  display: grid;
+  grid-template-columns:
+    1.5fr
+    0.5fr
+    2fr
+    0.7fr;
+
+  gap: 12px;
+  align-items: center;
+
+  padding: 12px 0;
+}
+
+.leave-history-head {
+  border-bottom: 1px solid var(--border-color);
+
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.leave-history-row {
+  border-bottom: 1px solid var(--border-color);
+
+  color: var(--text-primary);
+  font-size: 13px;
+}
+
+.leave-status {
+  width: fit-content;
+
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.leave-status.pending {
+  background: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+}
+
+.leave-status.approved {
+  background: rgba(22, 163, 74, 0.12);
+  color: #16a34a;
+}
+
+.leave-status.rejected {
+  background: rgba(220, 38, 38, 0.12);
+  color: #dc2626;
+}
+
+.leave-empty {
+  color: var(--text-secondary);
+}
