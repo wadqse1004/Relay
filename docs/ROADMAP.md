@@ -188,3 +188,29 @@
 - [x] React Effect 경고 정리
 - [x] Sidebar 연차 메뉴 연결
 - [x] Light / Dark 테마에서 LeavePage 동작 확인
+
+## Day 11 — Approval Inbox & Approve / Reject UI
+
+- [x] 결재함 조회 API 구현
+- [x] 결재자별 대기 문서 조회
+- [x] 현재 결재 순서(sequence)에 해당하는 문서만 노출
+- [x] 이전 결재자 미처리 문서 inbox 제외
+- [x] 신청자 이름 조회를 위한 User Join 추가
+- [x] 결재함 응답에 신청자 이름 포함
+- [x] 휴가 문서 상세 조회를 위한 LeaveRequest Join 추가
+- [x] 휴가 유형 / 시작일 / 종료일 / 사용일수 / 사유 응답 추가
+- [x] ApprovalInboxPage 생성
+- [x] 결재 대기 목록 UI 구현
+- [x] 문서 선택 기능 구현
+- [x] 결재 상세 정보 표시
+- [x] 신청자 이름 표시
+- [x] 휴가 상세 정보 표시
+- [x] 결재 의견 입력 UI 구현
+- [x] 승인 API 프론트 연동
+- [x] 반려 API 프론트 연동
+- [x] 승인 / 반려 후 결재함 자동 갱신
+- [x] 1차 승인 후 2차 결재함 노출 확인
+- [x] 최종 승인 후 문서 APPROVED 확인
+- [x] 최종 승인 후 연차 잔액 차감 확인
+- [x] 반려 후 문서 REJECTED 확인
+- [x] React Effect 경고 정리

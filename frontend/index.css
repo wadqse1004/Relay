@@ -507,3 +507,202 @@ a {
 .leave-empty {
   color: var(--text-secondary);
 }
+
+.approval-inbox-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.approval-inbox-header h1 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 24px;
+}
+
+.approval-inbox-header p {
+  margin: 6px 0 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.approval-inbox-list,
+.approval-detail-card {
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  overflow: hidden;
+}
+
+.approval-inbox-head,
+.approval-inbox-row {
+  display: grid;
+  grid-template-columns:
+    1.2fr
+    2fr
+    0.8fr
+    0.6fr
+    1.3fr;
+
+  gap: 12px;
+  align-items: center;
+
+  padding: 14px 18px;
+}
+
+.approval-inbox-head {
+  border-bottom: 1px solid var(--border-color);
+
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.approval-inbox-row {
+  width: 100%;
+
+  border: 0;
+  border-bottom: 1px solid var(--border-color);
+
+  background: transparent;
+  color: var(--text-primary);
+
+  text-align: left;
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+.approval-inbox-row:hover {
+  background: var(--bg-hover);
+}
+
+.approval-inbox-row.selected {
+  background: var(--bg-hover);
+}
+
+.approval-detail-card {
+  padding: 24px;
+}
+
+.approval-detail-card h2 {
+  margin: 0 0 20px;
+
+  color: var(--text-primary);
+  font-size: 18px;
+}
+
+.approval-detail-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+
+  margin-bottom: 20px;
+}
+
+.approval-detail-info div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.approval-detail-info span {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.approval-detail-info strong {
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.approval-comment {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.approval-comment span {
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.approval-comment textarea {
+  padding: 12px;
+
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+
+  resize: vertical;
+}
+
+.approval-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  margin-top: 18px;
+}
+
+.approval-approve-button,
+.approval-reject-button {
+  height: 40px;
+  padding: 0 18px;
+
+  border: 0;
+  border-radius: 8px;
+
+  color: white;
+
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.approval-approve-button {
+  background: #2563eb;
+}
+
+.approval-reject-button {
+  background: #dc2626;
+}
+
+.approval-message,
+.approval-error,
+.approval-success,
+.approval-empty {
+  padding: 16px;
+
+  border-radius: 8px;
+
+  background: var(--bg-secondary);
+}
+
+.approval-error {
+  color: #dc2626;
+}
+
+.approval-success {
+  color: #16a34a;
+}
+
+.approval-empty {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 800px) {
+  .approval-inbox-head {
+    display: none;
+  }
+
+  .approval-inbox-row {
+    grid-template-columns: 1fr;
+  }
+
+  .approval-detail-info {
+    grid-template-columns: 1fr;
+  }
+}

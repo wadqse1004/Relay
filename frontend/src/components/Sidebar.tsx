@@ -34,6 +34,11 @@ export default function Sidebar() {
               전자결재 · 연차
             </NavLink>
           </li>
+          <li>
+            <NavLink to="/approvals">
+              결재함
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </aside>

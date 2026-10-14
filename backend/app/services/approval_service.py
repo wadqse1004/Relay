@@ -18,6 +18,7 @@ from app.repositories.approval_repository import (
     find_document,
     find_previous_waiting_line,
     find_remaining_waiting_lines,
+    find_inbox_documents,
 )
 from app.schemas.approval import ApprovalActionRequest
 from app.repositories.leave_repository import (
@@ -366,4 +367,53 @@ def reject_document(
             status_code=500,
             detail="결재 반려 처리 중 오류가 발생했습니다.",
         )
+
+def get_approval_inbox(
+    db: Session,
+    approver_id: int,
+):
+    waiting_status_id = find_common_code_id(
+        db,
+        "APPROVAL_LINE_STATUS",
+        "WAITING",
+    )
+
+    rows = find_inbox_documents(
+        db=db,
+        approver_id=approver_id,
+        waiting_status_id=waiting_status_id,
+    )
+
+    return [
+    {
+        "document_id": document.id,
+        "document_no": document.document_no,
+        "title": document.title,
+        "requester_id": document.requester_id,
+        "requester_name": requester_name,
+        "line_id": line.id,
+        "sequence": line.sequence,
+        "status_code": status_code,
+        "status_name": status_name,
+        "submitted_at": document.submitted_at,
+
+        "leave_type_name": leave_type_name,
+        "start_date": start_date,
+        "end_date": end_date,
+        "days": days,
+        "reason": reason,
+    }
+    for (
+        document,
+        line,
+        status_code,
+        status_name,
+        requester_name,
+        leave_type_name,
+        start_date,
+        end_date,
+        days,
+        reason,
+    ) in rows
+    ]
 

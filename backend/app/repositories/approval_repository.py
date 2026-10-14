@@ -1,10 +1,12 @@
-from sqlalchemy import text
-from sqlalchemy.orm import Session
-from sqlalchemy import select
+from sqlalchemy.orm import aliased, Session
+from sqlalchemy import exists, select, text
 
 from app.models.approval_document import ApprovalDocument
 from app.models.approval_history import ApprovalHistory
 from app.models.approval_line import ApprovalLine
+from app.models.common_code import CommonCode
+from app.models.user import User
+from app.models.leave_request import LeaveRequest
 
 
 def find_common_code_id(
@@ -123,3 +125,77 @@ def find_previous_waiting_line(
     )
 
     return db.scalar(stmt)
+
+def find_inbox_documents(
+    db: Session,
+    approver_id: int,
+    waiting_status_id: int,
+):
+    previous_line = aliased(ApprovalLine)
+    leave_type_code = aliased(CommonCode)
+
+    previous_waiting_exists = (
+        select(previous_line.id)
+        .where(
+            previous_line.approval_document_id
+            == ApprovalLine.approval_document_id,
+            previous_line.sequence
+            < ApprovalLine.sequence,
+            previous_line.status_id
+            == waiting_status_id,
+            previous_line.is_active.is_(True),
+        )
+        .exists()
+    )
+
+    stmt = (
+        select(
+            ApprovalDocument,
+            ApprovalLine,
+            CommonCode.code.label("document_status_code"),
+            CommonCode.name.label("document_status_name"),
+            User.name.label("requester_name"),
+
+            leave_type_code.name.label("leave_type_name"),
+            LeaveRequest.start_date,
+            LeaveRequest.end_date,
+            LeaveRequest.days,
+            LeaveRequest.reason,
+        )
+        .join(
+            ApprovalLine,
+            ApprovalLine.approval_document_id
+            == ApprovalDocument.id,
+        )
+        .join(
+            CommonCode,
+            CommonCode.id
+            == ApprovalDocument.status_id,
+        )
+        .join(
+            User,
+            User.id == ApprovalDocument.requester_id,
+        )
+        .where(
+            ApprovalLine.approver_id == approver_id,
+            ApprovalLine.status_id == waiting_status_id,
+            ApprovalLine.is_active.is_(True),
+            ApprovalDocument.is_active.is_(True),
+            ~previous_waiting_exists,
+        )
+        .order_by(
+            ApprovalDocument.submitted_at.desc()
+        )
+        .outerjoin(
+            LeaveRequest,
+            LeaveRequest.approval_document_id
+            == ApprovalDocument.id,
+        )
+        .outerjoin(
+            leave_type_code,
+            leave_type_code.id
+            == LeaveRequest.leave_type_id,
+        )
+    )
+
+    return db.execute(stmt).all()

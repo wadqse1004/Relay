@@ -10,10 +10,12 @@ from app.services import approval_service
 from app.services.approval_service import (
     approve_document,
     reject_document,
+    get_approval_inbox,
 )
 from app.schemas.approval import (
     ApprovalActionRequest,
     ApprovalDocumentResponse,
+    ApprovalInboxItemResponse,
 )
 
 
@@ -66,4 +68,17 @@ def reject(
         db=db,
         document_id=document_id,
         request=request,
+    )
+
+@router.get(
+    "/inbox",
+    response_model=list[ApprovalInboxItemResponse],
+)
+def get_inbox(
+    approver_id: int,
+    db: Session = Depends(get_db),
+):
+    return get_approval_inbox(
+        db=db,
+        approver_id=approver_id,
     )

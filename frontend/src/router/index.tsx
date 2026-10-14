@@ -7,6 +7,7 @@ import MainLayout from "../layouts/MainLayout";
 import DashboardPage from "../pages/DashboardPage";
 import LoginPage from "../pages/LoginPage";
 import LeavePage from "../pages/LeavePage";
+import ApprovalInboxPage from "../pages/ApprovalInboxPage";
 
 const isAuthenticated = () => {
   return Boolean(localStorage.getItem("access_token"));
@@ -33,7 +34,10 @@ export const router = createBrowserRouter([
         path: "/leave",
         element: <LeavePage />,
       },
-      
+      {
+        path: "/approvals",
+        element: <ApprovalInboxPage />,
+      },
     ],
   },
 ]);
